@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<title> Mini project </title>
+       <meta charset='utf-8'>
+       <style>
+       canvas {
+          border: 2px solid rgb(0, 0, 0);
+       }
+       </style>
+    </head>
+
+    <body>
+        <canvas id='myCanvas' width='500' height='500'></canvas><br /><br />
+        <h1>Canvas demo </h1>
+        <div style = "position:relative; left:40em; top:-38em">
+            <h1>Tutorial</h1>
+            The html canvas is used to draw graphics onto a page using the canvas element. <br>The canvas
+            element only contains the graphics, to actually draw them javascript is needed.<br>
+            Using canvas many things can be drawn, in this specific example, <br>I am demonstrating how to draw
+            and color a line, circle and rectangle. <br>The cavas here is 500 x 500, when putting in values keep this in mind.<br>
+            Stroke is the outline of the shape and fill is the color the inside.<br> <br>
+            Html Canvas can be used for various different multimedia systems,<br>
+            For example it can be used to draw graphs, combine photos or create animations.
+
+
+            <h2>Line</h2>
+            To draw a line 2 commands are needed, "context.moveto" which brings the coordiantes <br> beginning position
+            and "context.lineto" which draws a line to the coordiantes.
+             <br> 4 parameters are required which are coordiantes 2 x and 2 y.<br> The first x and y coordinates are where the line
+            begins and the last two are where they finish. <br>
+             <a href=https://www.javascripttutorial.net/web-apis/javascript-draw-line> Line Tutorial Website </a>
+            <h2>Circle</h2>
+            To draw a circle the arc() method is called with 5 parameters. <br>
+            The first 2 parameters are the x and y coordinates represent the centre of the circle. <br> The third parameter is 
+            radius length. The last two are start angle and end angle<br> which are both in radians. 
+            The circle will start at the start angle and end at the end angle.<br>
+            <a href= https://www.javascripttutorial.net/web-apis/javascript-arc> Circle Tutorial Website</a>
+            <h2>Rectangle</h2>
+            To draw a rectangle the method strokeRect() is used.<br> The rectangle 4 parameters are required, 
+            the first two are the x and y coordiante of where<br>
+            the rectangle will start. The next 2 are the width and the height of the rectangle. <br>
+            <a href= https://www.javascripttutorial.net/web-apis/canvas-strokerect> Rectangle Tutorial Website</a>
+         </div>
+        
+
+
+<div style = "position:relative; top:-30em">
+<h1>Line Drawing</h1>
+Line start X-coordinate 1 <input type="text" id="x1"><br><br>
+Line start Y-coordinate 1 <input type="text" id="y1"><br><br>
+Line end X-coordinate 2 <input type="text" id="x2"><br><br>
+Line end Y-coordinate 2 <input type="text" id="y2"><br><br>
+Line width <input type="text" id="lineWidth"><br><br>
+Line Stroke color <input type="color" id="lineColor" name="lineColor"><br><br>
+</div>
+
+<div style = "position:relative; left:30em; top:-51em">
+<h1>Circle Drawing</h1>
+Circle X-coordinate <input type="text" id="circleX"><br><br>
+Cirlce Y-coordinate <input type="text" id="circleY"><br><br>
+Radius <input type="text" id="radius"><br><br>
+start angle <input type="text" id="sAngle"><br><br>
+end angle <input type="text" id="eAngle"><br><br>
+Cirlce Border Width <input type="text" id="circleBorderWidth"><br><br>
+Circle Stroke color <input type="color" id="circleColor" name="circleColor"><br><br>
+Circle Fill color <input type="color" id="circleFillColor" name="circleFillColor">
+</div>
+
+<div style = "position:relative; left:55em; top:-77em">
+    <h1>Rectangle Drawing</h1>
+    Rectangle X-coordinate <input type="text" id="rectX"><br><br>
+    Rectangle Y-coordinate <input type="text" id="rectY"><br><br>
+    Rectangle height <input type="text" id="rectHeight"><br><br>
+    Rectangle width  <input type="text" id="rectWidth"><br><br>
+    Rectangle border width  <input type="text" id="rectBorderWidth"><br><br>
+    Rectangle Stroke color <input type="color" id="rectColor" name="rectColor"> <br><br>
+    Rectangle Fill color <input type="color" id="rectFillColor" name="rectFillColor">
+    </div>
+
+<script>
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');    
+
+function drawLine(){
+    var x1 = document.getElementById("x1").value;
+    var x2 = document.getElementById("x2").value;
+    var y1 = document.getElementById("y1").value;
+    var y2 = document.getElementById("y2").value;
+    var lineColor = document.getElementById("lineColor").value;
+    var lineWidth = document.getElementById("lineWidth").value;
+    context.beginPath();
+    context.lineWidth = lineWidth;
+    context.strokeStyle= lineColor;
+    context.moveTo(x1,y1);
+    context.lineTo(x2,y2);
+    context.stroke();
+}
+
+function drawCircle(){
+    var circleX = document.getElementById("circleX").value;
+    var circleY = document.getElementById("circleY").value;
+    var radius = document.getElementById("radius").value;
+    var eAngle = document.getElementById("eAngle").value;
+    var sAngle = document.getElementById("sAngle").value;
+    var circleBorderWidth = document.getElementById("circleBorderWidth").value;
+    var circleColor = document.getElementById("circleColor").value;
+    var circleFillColor = document.getElementById("circleFillColor").value;
+
+    
+    context.beginPath();
+    context.lineWidth = circleBorderWidth;
+    context.strokeStyle= circleColor;
+    context.arc(circleX, circleY, radius, sAngle, eAngle * Math.PI);
+    context.stroke();
+    context.fillStyle = circleFillColor;
+    context.fill();
+}
+
+
+function drawRect(){
+    var rectX = document.getElementById("rectX").value;
+    var rectY = document.getElementById("rectY").value;
+    var rectHeight = document.getElementById("rectHeight").value;
+    var rectWidth = document.getElementById("rectWidth").value;
+    var rectBorderWidth = document.getElementById("rectBorderWidth").value;
+    var rectColor = document.getElementById("rectColor").value;
+    var rectFillColor = document.getElementById("rectFillColor").value;
+
+    
+    context.beginPath();
+    context.strokeStyle= rectColor;
+    context.rect(rectX, rectY, rectHeight, rectWidth);
+    context.stroke();
+    context.fillStyle = rectFillColor;
+    context.fill();
+}
+
+function clearcanvas(){
+    context.fillStyle = 'white';
+    context.fillRect(0,0,canvas.width,canvas.height);
+}
+
+</script>
+<br><br>
+
+<div style = "position:relative; top:-75em">
+<h1>Draw a Line</h1>
+
+<input type="button" value="draw" onclick="drawLine()">
+</div>
+<br>
+<div style = "position:relative; left:30em; top:-83em">
+<h1>Draw a Circle</h1>
+
+<input type="button" value = "draw" onclick="drawCircle()">
+</div>
+
+<div style = "position:relative; left:55em; top:-89em">
+    <h1>Draw a Rectangle</h1>
+    <input type="button" value = "draw" onclick="drawRect()">
+    </div>
+
+<div style = "position:relative; top:-85em">
+<h1>Reset</h1>
+<input type="button" value = "Reset" onclick="clearcanvas()">
+</div>
+
+</div>
+
+
+<div style = "position:relative; top:-80em">
+<h2>Feature Summary</h2>
+<ul>
+   <li> Draw a line </li>
+   <li>Change the color of the line </li>
+   <li>Draw many different lines </li>
+   <li>Draw a circle </li>
+   <li>Change the colour of the circle </li>
+   <li>Change the colour of the circles border </li>
+   <li> Change the width of the circle border </li>
+   <li>Draw multiple circles without them being erased </li>
+   <li> Draw a rectangle </li>
+   <li> Change the colour of the rectangle </li>
+   <li>Change the width and height of the rectangles </li>
+   <li>Change the border width and colour of the rectangle </li>
+   <li>Draw multiple rectangles </li>
+   <li> Reset the canvas with the reset button </li>
+
+</ul>
+</div>
+
+</body>
+    </html>
+
